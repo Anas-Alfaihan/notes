@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 const chalk = require('chalk');
 const { User, Note } = require('../models/Models');
 
-const sequelize = new Sequelize(process.env.PG_URI);
+const sequelize = new Sequelize(process.env.PG_URI, { logging: false });
 
 const port = process.env.PORT;
 

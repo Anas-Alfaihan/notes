@@ -1,7 +1,9 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize(process.env.PG_URI);
-class User extends Model {}
-User.init(
+const chalk = require('chalk');
+
+class Author extends Model {}
+Author.init(
     {
         username: {
             type: DataTypes.STRING,
@@ -19,7 +21,7 @@ User.init(
     },
     {
         sequelize,
-        modelName: 'User',
+        modelName: 'Author',
     }
 );
 
@@ -45,16 +47,20 @@ Note.init(
     }
 );
 
-User.Notes = User.hasMany(Note); // A user can have many notes
-Note.Usre = Note.belongsTo(User); // A note belongs to one user
+Author.Notes = Author.hasMany(Note); // A Author can have many notes
+Note.Usre = Note.belongsTo(Author); // A note belongs to one Author
 
 sequelize
-    .sync()
+    .sync({ logging: false })
     .then(() => {
-        console.log('Database schema synchronized successfully.');
+        console.log(
+            `${chalk.green('✓')} ${chalk.blue(
+                'Database schema synchronized successfully.'
+            )}`
+        );
     })
     .catch((error) => {
         console.error('Error synchronizing database schema:', error);
     });
 
-module.exports = { User, Note };
+module.exports = { Author, Note };
