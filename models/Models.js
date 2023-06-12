@@ -35,11 +35,6 @@ Note.init(
         description: {
             type: DataTypes.TEXT,
         },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal('NOW()'),
-        },
     },
     {
         sequelize,
